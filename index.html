@@ -332,6 +332,13 @@ html {
    margin-bottom: 25px;/*space above button*/
    margin-top: 25px;
 }
+.card details.benefits summary:hover {
+  color: #2b881e;
+}
+
+.card details.benefits[open] summary {
+  color: #2b881e;
+}
 /* Arrow */
 .card details.benefits summary .arrow::before {
   content: "⌄";
@@ -536,7 +543,7 @@ html {
 /* ================= ABOUT ================= */
 .about-julian {
   background: #e4e6cc;
-  padding: 140px 40px;
+  padding: 80px 20px;
 }
 
 
@@ -549,16 +556,24 @@ html {
 }
 
 .about-images {
-  position: static;
-  max-width: 360px;
+  position: relative;
+  width: 100%;              /* ✅ important */
+  max-width: 360px;         /* ✅ keep limit */
   height: 420px;
+  margin: 0 auto;           /* ✅ centers it */
   border-radius: 12px;
+  overflow: hidden;
 }
 
-.about-images img {
+.about-images img,
+.about-images video {
   width: 100%;
+  height: 100%;
+  object-fit: contain;
+
   display: block;
 }
+
 
 .about-content {
   order: 2;
@@ -605,132 +620,6 @@ html {
   object-fit:cover;
   background: #000;
 } */
-
-/* ---------- MOBILE ---------- */
-/* ---------- MOBILE ---------- */
-@media (max-width: 900px) {
-
-  /* HEADER */  
-  header {
-    min-height: 360px;
-    max-height: 420px;
-  }
-
-  .header-text {
-    padding: 20px;
-    text-align: center;
-    flex-direction: column;
-  }
-
-  .header-left h1 {
-    font-size: 38px;
-  }
-
-  .header-left p {
-    font-size: 14px;
-    letter-spacing: 2px;
-  }
-
-  .header-right {
-    position: absolute;
-    bottom: 35px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 0;
-  }
-  .header-right .header-book {
-    background: #2c2c2c; /* dark background */
-    color: #f3f3e3;       /* text color */
-    padding: 12px 28px;
-    z-index: 5;
-  }
-
-  .header-book {
-    padding: 12px 26px;
-    font-size: 14px;
-  }
-
-  /* ABOUT */
-  .about-wrap {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .about-images {
-    max-width: 240px;
-    height: 280px;
-    margin: 0 auto;
-  }
-
-  .secondary-img {
-    position: static;
-    transform: none;
-    width: 100%;
-    margin-top: 30px;
-  }
-
-  .about-content h2 {
-    text-align: center;
-  }
-
-  .about-content p {
-    max-width: 100%;
-  }
-
-  /* FLOW SECTION */
-  .flow-text {
-    font-size: 28px;
-  }
-
-  .flow-header {
-    padding: 0 15px;
-  }
-
-  .flow-name {
-    font-size: 22px;
-  }
-
-  .flow-button {
-    padding: 8px 18px;
-    font-size: 12px;
-  }
-
-  .flow-icon img {
-    width: 24px;
-    height: 24px;
-  }
-}
-
-/* ---------- SMALL MOBILE ---------- */
-@media (max-width: 700px) {
-
-  .contact-inner {
-    padding: 50px 25px;
-  }
-
-  .contact-heading {
-    font-size: 32px;
-  }
-
-  .name-row {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 600px) {
-
-  .faq summary {
-    font-size: 18px;
-  }
-
-  .faq p {
-    font-size: 15px;
-  }
-
-  .faq details {
-    padding: 20px;
-  }
-}
 
 /* ---------- ABOUT ---------- */
 .about p {
@@ -826,14 +715,15 @@ html {
   font-family: 'Playfair Display', serif;
   text-transform: capitalize;
   font-size: 34px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.5;
-  color: #e9e0ed;
+  color: #2c2c2c;
   text-align:center;
   max-width: 700px;
-  text-shadow: 0 4px 8px #2f043e;
+  text-shadow: 0 2px 6px #ffffff;
   padding: 0 20px;
   margin: 0 auto;  
+  -webkit-text-stroke: 1px #2c2c2ca4; 
 }
 
 /* =====  CONTACT STYLE ===== */
@@ -1119,6 +1009,151 @@ footer {
   margin-top: 8px;
   text-align: center;
 }
+
+
+/* ---------- MOBILE ---------- */
+/* ---------- MOBILE ---------- */
+@media (max-width: 900px) {
+
+  /* HEADER */  
+  header {
+    min-height: 360px;
+    max-height: 420px;
+  }
+
+  .header-text {
+    padding: 20px;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .header-left h1 {
+    font-size: 38px;
+  }
+
+  .header-left p {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  .header-right {
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+  }
+  .header-right .header-book {
+    background: #2c2c2c; /* dark background */
+    color: #f3f3e3;       /* text color */
+    padding: 12px 28px;
+    z-index: 5;
+  }
+
+  .header-book {
+    padding: 12px 26px;
+    font-size: 14px;
+  }
+
+  /* ABOUT */
+  .about-wrap {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+.about-images {
+    height: auto;      /* 🔑 allow natural height */
+    aspect-ratio: 1 / 1; /* square image, looks elegant */
+  }
+
+  .about-images img {
+    object-fit: contain;
+  }
+  .secondary-img {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .about-content h2 {
+    text-align: center;
+  }
+
+  .about-content p {
+    max-width: 100%;
+  }
+
+  /* FLOW SECTION */
+  .flow-text {
+    font-size: 28px;
+  }
+
+  .flow-header {
+    padding: 0 15px;
+  }
+
+  .flow-name {
+    font-size: 22px;
+  }
+
+  .flow-button {
+    padding: 8px 18px;
+    font-size: 12px;
+  }
+
+  .flow-icon img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .flow-section {
+    padding: 100px 20px 140px;
+  }
+
+  .flow-text {
+    font-size: 26px;
+    line-height: 1.6;
+  }
+
+}
+
+@media (max-width: 900px) {
+  section {
+    min-height: auto;
+  }
+}
+
+
+/* ---------- SMALL MOBILE ---------- */
+@media (max-width: 900px) {
+  .contact-inner {
+    padding: 50px 25px;
+    border-radius: 30px;  /* smaller curve */
+  }
+
+  .contact-heading {
+    font-size: 32px;
+    margin-bottom: 40px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .faq summary {
+    font-size: 18px;
+  }
+
+  .faq p {
+    font-size: 15px;
+  }
+
+  .faq details {
+    padding: 20px;
+  }
+}
+
 </style>
 </head>
 
@@ -1194,7 +1229,7 @@ footer {
     required
   >
 
-  <button type="submit">Welcome</button>
+  <button type="submit">ENTER</button>
 </form>
 
 
@@ -1498,6 +1533,7 @@ footer {
    
      <div class="about-images">
       <img src="my.jpeg" alt="Harish portrait" loading="lazy"><br><br>
+      
       <!-- <video class="flow-video" autoplay muted loop playsinline>
   <source src="hands.mp4" type="video/mp4">
 </video> -->
@@ -1542,12 +1578,11 @@ footer {
 
   <div class="flow-video-wrap">
     <video class="flow-video" autoplay muted loop playsinline>
-      <source src="bgamethyst.mp4" type="video/mp4">
+      <source src="citrine.mp4" type="video/mp4">
     </video>
 
     <div class="flow-text">
-      Reiki is a practice of returning to balance, reminding your energy of its
-      natural ability to heal, restore, and flow.
+      Reiki is the art of returning to balance — a sacred remembering that restores the body’s natural ability to heal and flow.
     </div>
   </div>
 
@@ -1741,7 +1776,7 @@ document.querySelector('#bookingOverlay form').addEventListener('submit', functi
 <button type="submit" id="bookingBtn">Book Now</button>
 
   <p class="payment-note">
-  Payment will be shared after session confirmation.
+  Payment information will be sent after confirming your session.
 </p>
 </form>
 
@@ -1941,7 +1976,5 @@ window.addEventListener('load', appearOnScroll);
 </footer>
 </body>
 </html>
-
-
 
 
