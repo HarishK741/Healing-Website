@@ -230,16 +230,17 @@ h2 { font-size: 36px; margin-top: 40px; }
     <p>
       No prior experience is required — only openness to rest, receive, and reconnect.
     </p>
+
+
   <a href="javascript:void(0);" class="btn" id="bookBtn">Book a Healing Session</a>
-<!-- BOOKING FORM SECTION -->
-<section id="booking" class="story-section" style="display:none;">
+<section id="booking" class="story-section" style="display:none";>
   <div class="story-block bg-light">
     <h2>Book a Healing Session</h2>
     <p>Please fill in your details below and I will get back to you to schedule your session.</p>
 
-    <form id="bookingForm" action="https://formsubmit.co/YOUR_EMAIL_HERE" method="POST">
-      
-      <!-- Hidden fields -->
+    <form id="bookingForm" action="https://formsubmit.co/harish67890h@gmail.com" method="POST">
+                          
+     
       <input type="hidden" name="_next" value="thank-you.html">
       <input type="hidden" name="_captcha" value="false">
 
@@ -249,16 +250,26 @@ h2 { font-size: 36px; margin-top: 40px; }
       <label for="email">Email Address*</label><br>
       <input type="email" id="email" name="email" required style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc;">
 
-      <label for="phone">Phone Number*</label><br>
+      <label for="phone">Whatsapp Number*</label><br>
       <input type="tel" id="phone" name="phone" required style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc;">
 
-      <label for="sessionType">Session Type*</label><br>
+      <label for="sessionType">Session Name*</label><br>
       <select id="sessionType" name="sessionType" required style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc;">
         <option value="">--Select Session--</option>
-        <option value="Reiki Healing">Reiki Healing</option>
-        <option value="Energy Balancing">Energy Balancing</option>
-        <option value="Reiki + Energy Guidance">Reiki + Energy Guidance</option>
+        <option value="Basic Reiki Session">Basic Reiki Session</option>
+        <option value="Reiki Master Session">Reiki Master Session</option>
+        <option value="Lama Fera Session">Lama Fera Session</option>
+        <option value="Magnified Healing Session">Magnified Healing Session</option>        
+        <option value="Advanced Healing Session">Advanced Healing Session</option>
       </select>
+
+      <label for="sessionDuration">Session Duration*</label><br>
+<select id="sessionDuration" name="session_duration" required
+  style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc;">
+  <option value="">--Select Duration--</option>
+</select>
+
+      <input type="hidden" id="sessionPrice" name="session_price">
 
       <label for="preferredDate">Preferred Date*</label><br>
       <input type="date" id="preferredDate" name="preferredDate" required style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc;">
@@ -277,6 +288,50 @@ h2 { font-size: 36px; margin-top: 40px; }
     bookingSection.scrollIntoView({ behavior: 'smooth' });
   });
 </script>
+
+<script>
+const sessionData = {
+  "Basic Reiki Session": { "30 mins": "₹600" },
+  "Reiki Master Session": { "45 mins": "₹900" },
+  "Lama Fera Session": {
+    "30 mins": "₹1200",
+    "45 mins": "₹2000"
+  },
+  "Magnified Healing Session": {
+    "30 mins": "₹900",
+    "45 mins": "₹1800"
+  },
+  "Advanced Healing Session": { "75 mins": "₹2500" }
+};
+
+const sessionType = document.getElementById("sessionType");
+const sessionDuration = document.getElementById("sessionDuration");
+const sessionPrice = document.getElementById("sessionPrice");
+
+sessionType.addEventListener("change", function () {
+  sessionDuration.innerHTML = '<option value="">--Select Duration--</option>';
+  sessionPrice.value = "";
+
+  const durations = sessionData[this.value];
+  if (!durations) return;
+
+  for (const duration in durations) {
+    const opt = document.createElement("option");
+    opt.value = duration; // duration sent to email
+    opt.textContent = `${duration} · ${durations[duration]}`;
+    opt.dataset.price = durations[duration];
+    sessionDuration.appendChild(opt);
+  }
+});
+
+// duration → price (hidden)
+sessionDuration.addEventListener("change", function () {
+  const selected = this.selectedOptions[0];
+  sessionPrice.value = selected ? selected.dataset.price : "";
+});
+</script>
+
+
 
 </body>
 </html>
